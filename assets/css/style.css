@@ -1,0 +1,2133 @@
+/* ============================================
+   CSS Variables & Base Styles
+   ============================================ */
+
+:root {
+    --bg-primary: #0f1115;
+    --bg-secondary: #161a22;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b3c0;
+    --accent: #00ff99;
+    --accent-hover: #00cc7a;
+    --border-radius: 14px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 12px 40px rgba(0, 255, 153, 0.15);
+    --section-padding-mobile: 60px 0;
+    --section-padding-desktop: 100px 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lilita One', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+/* ============================================
+   Container & Layout
+   ============================================ */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: var(--section-padding-mobile);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(0, 255, 153, 0.1);
+    border-color: var(--accent-hover);
+}
+
+/* ============================================
+   Header & Navigation
+   ============================================ */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(15, 17, 21, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+header.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: var(--transition);
+    background: linear-gradient(90deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.language-switcher {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.language-switcher button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.language-switcher button:hover,
+.language-switcher button.active {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    border-color: var(--accent);
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: none;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-left: 32px;
+    font-weight: 500;
+    transition: var(--transition);
+    font-size: 15px;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.mobile-menu-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 24px;
+    cursor: pointer;
+    display: block;
+    transition: var(--transition);
+    padding: 5px;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--accent);
+    transform: rotate(90deg);
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-secondary);
+    padding: 20px;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 999;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.mobile-nav a:hover {
+    color: var(--accent);
+    padding-left: 10px;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+
+.hero {
+    padding-top: 140px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow);
+    border: 4px solid var(--accent);
+    transition: var(--transition);
+    opacity: 0;
+    transform: scale(0.6);
+}
+
+.hero-image.animate {
+    animation: profilePopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.hero-image:hover {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: var(--shadow-hover);
+}
+
+.hero-text {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    background: linear-gradient(90deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+    filter: blur(10px);
+    transform: translateX(-50px);
+}
+
+.hero h1.animate {
+    animation: titleSlideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Neon animated line below heading */
+.hero h1::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent,
+        var(--accent),
+        rgba(0, 255, 153, 0.8),
+        var(--accent),
+        transparent
+    );
+    background-size: 200% 100%;
+    opacity: 0;
+    box-shadow: 0 0 10px var(--accent),
+                0 0 20px var(--accent),
+                0 0 30px rgba(0, 255, 153, 0.5);
+    animation: neonLineReveal 0.8s ease 2.5s forwards,
+               neonLineGlow 2s ease-in-out 3.3s infinite;
+}
+
+@keyframes neonLineReveal {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes neonLineGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px var(--accent),
+                    0 0 20px var(--accent),
+                    0 0 30px rgba(0, 255, 153, 0.5);
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 0 0 15px var(--accent),
+                    0 0 30px var(--accent),
+                    0 0 45px rgba(0, 255, 153, 0.8),
+                    0 0 60px rgba(0, 255, 153, 0.4);
+        opacity: 0.9;
+    }
+}
+
+.hero p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.8;
+    opacity: 0;
+    position: relative;
+}
+
+.hero p.typing {
+    opacity: 1;
+}
+
+.hero p.typing::after {
+    content: '▍';
+    color: var(--accent);
+    animation: blinkCursor 0.75s step-end infinite;
+    margin-left: 2px;
+}
+
+.hero p.typing.complete::after {
+    animation: blinkCursor 1s step-end infinite;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.hero-buttons.fadeInUp {
+    animation: fadeInUpText 1s ease 3s forwards;
+}
+
+/* ============================================
+   About Section
+   ============================================ */
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    border-radius: 2px;
+}
+
+.about-content {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.about-content:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.about-text {
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.skill-item {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: calc(var(--border-radius) - 4px);
+    border-left: 4px solid var(--accent);
+    transition: var(--transition);
+    text-align: center;
+    font-weight: 500;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left-color: var(--accent-hover);
+}
+
+/* ============================================
+   Services Section
+   ============================================ */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.service-card {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 32px 24px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 153, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    color: var(--accent);
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ============================================
+   Projects Section
+   ============================================ */
+
+.my-works-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.work-item {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+}
+
+.work-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 153, 0.1), rgba(0, 255, 153, 0.05));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.work-item:hover::after {
+    opacity: 1;
+}
+
+.work-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+.work-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: var(--transition);
+}
+
+.work-item:hover img {
+    transform: scale(1.05);
+}
+
+/* ============================================
+   Contact Section
+   ============================================ */
+
+.contact-container {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    box-shadow: var(--shadow);
+}
+
+.contact-info {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.contact-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    color: var(--accent);
+}
+
+.contact-info p {
+    margin: 20px 0;
+    color: var(--text-secondary);
+}
+
+.contact-info a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.125rem;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.contact-info a:hover {
+    color: var(--accent-hover);
+    transform: translateX(5px);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: calc(var(--border-radius) - 4px);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 16px;
+    transition: var(--transition);
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 255, 153, 0.1);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+footer {
+    background-color: var(--bg-secondary);
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   WhatsApp Floating Button
+   ============================================ */
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    left: auto;
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.whatsapp-float.show {
+    opacity: 1 !important;
+    transform: scale(1) rotate(0deg) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    animation: whatsappPopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+               whatsappPulse 2s ease-in-out 0.8s infinite;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.15) !important;
+    box-shadow: 0 8px 40px rgba(37, 211, 102, 0.8);
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-10px) translateY(-50%) scale(1);
+}
+
+.whatsapp-float svg {
+    width: 35px;
+    height: 35px;
+    fill: #fff;
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.whatsapp-float:hover svg {
+    transform: scale(1.1);
+}
+
+/* WhatsApp Notification Badge */
+.whatsapp-notification {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #ff4444, #ff6666);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4),
+                0 0 0 3px rgba(15, 17, 21, 0.8);
+    z-index: 1002;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: notificationPulse 2s ease-in-out infinite;
+    font-family: 'Outfit', sans-serif;
+    min-width: 32px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.whatsapp-float.show .whatsapp-notification {
+    animation: notificationPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both,
+               notificationPulse 2s ease-in-out 0.8s infinite;
+}
+
+@keyframes notificationPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+    60% {
+        transform: scale(1.3) rotate(10deg);
+    }
+    80% {
+        transform: scale(0.9) rotate(-5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes notificationPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4),
+                    0 0 0 3px rgba(15, 17, 21, 0.8);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(255, 68, 68, 0.6),
+                    0 0 0 4px rgba(15, 17, 21, 0.8),
+                    0 0 0 8px rgba(255, 68, 68, 0.2);
+    }
+}
+
+/* WhatsApp Tooltip Message */
+.whatsapp-tooltip {
+    position: absolute;
+    right: 75px;
+    top: 50%;
+    transform: translateX(-10px) translateY(-50%) scale(0.8);
+    background: linear-gradient(135deg, #161a22 0%, #0f1115 100%);
+    color: var(--text-primary);
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(37, 211, 102, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    border: 1px solid rgba(37, 211, 102, 0.2);
+    max-width: 280px;
+    white-space: normal;
+    line-height: 1.5;
+    z-index: 1001;
+}
+
+.whatsapp-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-10px) translateY(-50%) scale(1);
+    animation: tooltipPulse 2s ease-in-out infinite;
+}
+
+.whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 10px;
+    border-color: transparent transparent transparent #161a22;
+}
+
+.whatsapp-tooltip strong {
+    color: #25D366;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+/* WhatsApp Animation Keyframes */
+@keyframes whatsappPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+    60% {
+        transform: scale(1.2) rotate(10deg);
+    }
+    80% {
+        transform: scale(0.9) rotate(-5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes whatsappPulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4),
+                    0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.6),
+                    0 0 0 10px rgba(37, 211, 102, 0);
+    }
+}
+
+@keyframes tooltipPulse {
+    0%, 100% {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(37, 211, 102, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5),
+                    0 0 30px rgba(37, 211, 102, 0.5),
+                    0 0 40px rgba(37, 211, 102, 0.3);
+    }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUpText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes profilePopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes titleSlideIn {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateX(-50px);
+    }
+    50% {
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes subtitleTyping {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes blinkCursor {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ============================================
+   Responsive Design - Tablet
+   ============================================ */
+
+@media (min-width: 768px) {
+    html {
+        font-size: 17px;
+    }
+
+    .container {
+        padding: 0 40px;
+    }
+
+    section {
+        padding: var(--section-padding-desktop);
+    }
+
+    .nav-links {
+        display: flex;
+    }
+
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        text-align: left;
+        gap: 60px;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        font-size: 1.25rem;
+    }
+
+    .hero-image {
+        max-width: 350px;
+    }
+
+    .social-icons {
+        gap: 24px;
+        margin-top: 40px;
+    }
+
+    .social-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .social-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .about-content {
+        padding: 50px 40px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .my-works-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-container {
+        padding: 50px 40px;
+    }
+}
+
+/* ============================================
+   Responsive Design - Desktop
+   ============================================ */
+
+@media (min-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .my-works-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 60px;
+        align-items: start;
+        padding: 60px 50px;
+    }
+
+    .contact-info {
+        text-align: left;
+        margin-bottom: 0;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .social-icons {
+        gap: 28px;
+    }
+
+    .social-icon {
+        width: 55px;
+        height: 55px;
+    }
+
+    .social-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+/* ============================================
+   RTL Support for Arabic
+   ============================================ */
+
+html[lang="ar"] body {
+    direction: rtl;
+    text-align: right;
+}
+
+html[lang="ar"] .mobile-nav {
+    left: auto;
+    right: 0;
+    text-align: right;
+}
+
+html[lang="ar"] .mobile-nav a:hover {
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+html[lang="ar"] .header-content {
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .language-switcher {
+    margin-right: 0;
+    margin-left: 20px;
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .hero-content {
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .hero-text {
+    text-align: right;
+}
+
+html[lang="ar"] .hero h1 {
+    background: linear-gradient(90deg, var(--accent), #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+html[lang="ar"] .hero-buttons {
+    justify-content: flex-end;
+}
+
+html[lang="ar"] .social-icons {
+    justify-content: flex-end;
+}
+
+/* ============================================
+   iPhone Specific Responsive Design
+   ============================================ */
+
+/* iPhone SE (375px) and smaller */
+@media only screen and (max-width: 375px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero {
+        padding-top: 120px;
+        min-height: 85vh;
+    }
+
+    .hero-image {
+        max-width: 200px;
+    }
+
+    .hero h1 {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .social-icons {
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .social-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .social-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .about-content,
+    .contact-container {
+        padding: 24px 20px;
+    }
+
+    .service-card {
+        padding: 24px 20px;
+    }
+
+    .service-card h3 {
+        font-size: 1.25rem;
+    }
+}
+
+/* iPhone 12/13/14 (390px) */
+@media only screen and (min-width: 376px) and (max-width: 390px) {
+    .hero h1 {
+        font-size: 1.4rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .hero-image {
+        max-width: 220px;
+    }
+}
+
+/* iPhone 12/13/14 Pro Max (428px) */
+@media only screen and (min-width: 391px) and (max-width: 428px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-image {
+        max-width: 240px;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    /* Fix for iOS Safari viewport units */
+    .hero {
+        min-height: -webkit-fill-available;
+    }
+
+    /* Fix for safe area insets on iPhone X and newer */
+    .whatsapp-float {
+        bottom: max(20px, env(safe-area-inset-bottom));
+        right: max(15px, env(safe-area-inset-right));
+    }
+
+    header {
+        padding-top: max(20px, env(safe-area-inset-top));
+    }
+
+    /* Fix for iOS Safari scrolling */
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Fix for iOS Safari input zoom */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+
+    /* Fix for iOS Safari button tap highlight */
+    .btn,
+    .social-icon,
+    .whatsapp-float {
+        -webkit-tap-highlight-color: rgba(0, 255, 153, 0.3);
+    }
+}
+
+/* Landscape orientation for iPhone */
+@media only screen and (max-width: 926px) and (orientation: landscape) {
+    .hero {
+        padding-top: 100px;
+        min-height: auto;
+        padding-bottom: 40px;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .hero-image {
+        max-width: 180px;
+    }
+
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    .social-icons {
+        gap: 10px;
+        margin-top: 15px;
+    }
+}
+
+/* Fix for iPhone notch and safe areas */
+@supports (padding: max(0px)) {
+    .container {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding-left: max(15px, env(safe-area-inset-left));
+            padding-right: max(15px, env(safe-area-inset-right));
+        }
+    }
+}
+
+/* ============================================
+   WhatsApp Side Notification (Beside Button)
+   ============================================ */
+
+.whatsapp-side-notification {
+    position: absolute;
+    right: 75px;
+    left: auto;
+    bottom: 0;
+    width: 320px;
+    max-width: calc(100vw - 120px);
+    background: linear-gradient(135deg, #161a22 0%, #0f1115 100%);
+    border: 1px solid rgba(37, 211, 102, 0.3);
+    border-radius: var(--border-radius);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(37, 211, 102, 0.2),
+                0 0 60px rgba(37, 211, 102, 0.1);
+    z-index: 1001;
+    opacity: 0;
+    transform: translateX(20px) scale(0.9);
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.whatsapp-float.show .whatsapp-side-notification {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+    animation: sideNotificationPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+}
+
+.side-notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.side-notification-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.side-notification-message {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+}
+
+.side-notification-close {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+    margin: 0;
+}
+
+.side-notification-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.side-notification-close svg {
+    width: 12px;
+    height: 12px;
+    fill: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.side-notification-close:hover svg {
+    fill: var(--text-primary);
+}
+
+.side-notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #25D366, #20BA5A);
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(0);
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float.show .whatsapp-side-notification .side-notification-progress {
+    animation: progressBar 5s linear forwards;
+}
+
+@keyframes sideNotificationPopIn {
+    0% {
+        opacity: 0;
+        transform: translateX(20px) scale(0.9);
+    }
+    60% {
+        transform: translateX(-3px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6),
+                    0 0 30px rgba(37, 211, 102, 0.3);
+    }
+}
+
+@keyframes progressBar {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+/* RTL Support for Side Notification */
+html[lang="ar"] .whatsapp-float {
+    right: auto;
+    left: 30px;
+}
+
+html[lang="ar"] .whatsapp-side-notification {
+    right: auto;
+    left: 75px;
+    transform: translateX(-20px) scale(0.9);
+}
+
+html[lang="ar"] .whatsapp-float.show .whatsapp-side-notification {
+    transform: translateX(0) scale(1);
+}
+
+html[lang="ar"] .side-notification-content {
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .side-notification-text {
+    text-align: right;
+}
+
+/* Responsive Design for Side Notification */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 25px;
+        right: 20px;
+    }
+
+    .whatsapp-float svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .whatsapp-side-notification {
+        width: 280px;
+        max-width: calc(100vw - 100px);
+        right: 80px;
+        bottom: 0;
+    }
+
+    .side-notification-content {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .side-notification-message {
+        font-size: 12px;
+    }
+
+    html[lang="ar"] .whatsapp-float {
+        left: 20px;
+        right: auto;
+    }
+
+    html[lang="ar"] .whatsapp-side-notification {
+        left: 80px;
+        right: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 15px;
+    }
+
+    .whatsapp-float svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .whatsapp-side-notification {
+        width: calc(100vw - 90px);
+        max-width: 260px;
+        right: 70px;
+        bottom: 0;
+    }
+
+    .side-notification-content {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .side-notification-message {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    .side-notification-close {
+        width: 24px;
+        height: 24px;
+    }
+
+    .side-notification-close svg {
+        width: 10px;
+        height: 10px;
+    }
+
+    html[lang="ar"] .whatsapp-float {
+        left: 15px;
+        right: auto;
+    }
+
+    html[lang="ar"] .whatsapp-side-notification {
+        left: 70px;
+        right: auto;
+    }
+}
+
+@media (max-width: 360px) {
+    .whatsapp-side-notification {
+        width: calc(100vw - 80px);
+        max-width: 240px;
+        right: 65px;
+    }
+
+    .side-notification-content {
+        padding: 10px;
+        gap: 6px;
+    }
+
+    .side-notification-message {
+        font-size: 10px;
+    }
+
+    html[lang="ar"] .whatsapp-side-notification {
+        left: 65px;
+        right: auto;
+    }
+}
+
+/* ============================================
+   Social Media Icons
+   ============================================ */
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0);
+    visibility: hidden;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(0, 255, 153, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.social-icon:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.social-icon:hover {
+    transform: scale(1.15) translateY(-3px);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 8px 20px rgba(0, 255, 153, 0.3);
+}
+
+.social-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.social-icon:hover svg {
+    transform: scale(1.1);
+}
+
+/* Social icon specific colors */
+.social-icon.facebook:hover {
+    border-color: #1877f2;
+    color: #1877f2;
+    box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
+}
+
+.social-icon.instagram:hover {
+    border-color: #e4405f;
+    color: #e4405f;
+    box-shadow: 0 8px 20px rgba(228, 64, 95, 0.3);
+}
+
+.social-icon.whatsapp:hover {
+    border-color: #25d366;
+    color: #25d366;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+.social-icon.discord:hover {
+    border-color: #5865f2;
+    color: #5865f2;
+    box-shadow: 0 8px 20px rgba(88, 101, 242, 0.3);
+}
+
+
+html[lang="ar"] .skill-item {
+    border-left: none;
+    border-right: 4px solid var(--accent);
+}
+
+html[lang="ar"] .skill-item:hover {
+    border-right-color: var(--accent-hover);
+}
+
+html[lang="ar"] .form-group label {
+    text-align: right;
+}
+
+html[lang="ar"] .form-group input,
+html[lang="ar"] .form-group textarea {
+    text-align: right;
+}
+
+html[lang="ar"] .whatsapp-float {
+    right: auto;
+    left: 30px;
+}
+
+html[lang="ar"] .whatsapp-tooltip {
+    right: auto;
+    left: 75px;
+    text-align: right;
+}
+
+html[lang="ar"] .whatsapp-tooltip::after {
+    right: auto;
+    left: -8px;
+    border-width: 8px 10px 8px 0;
+    border-color: transparent #161a22 transparent transparent;
+}
+
+/* Mobile Responsive for WhatsApp Tooltip */
+@media (max-width: 768px) {
+    .whatsapp-tooltip {
+        right: 75px;
+        max-width: 200px;
+        font-size: 12px;
+        padding: 12px 16px;
+    }
+    
+    .whatsapp-tooltip strong {
+        font-size: 13px;
+    }
+    
+    html[lang="ar"] .whatsapp-tooltip {
+        left: 75px;
+        right: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .whatsapp-tooltip {
+        right: 70px;
+        max-width: 180px;
+        font-size: 11px;
+        padding: 10px 14px;
+    }
+    
+    .whatsapp-float svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .whatsapp-notification {
+        font-size: 9px;
+        padding: 3px 6px;
+        min-width: 28px;
+        top: -6px;
+        right: -6px;
+    }
+    
+    html[lang="ar"] .whatsapp-float {
+        left: 20px;
+        right: auto;
+    }
+    
+    html[lang="ar"] .whatsapp-tooltip {
+        left: 70px;
+    }
+}
+
+html[lang="ar"] .service-card {
+    text-align: right;
+}
+
+html[lang="ar"] .work-item,
+html[lang="ar"] .portfolio-card {
+    text-align: right;
+}
+
+html[lang="ar"] .contact-info {
+    text-align: right;
+}
+
+html[lang="ar"] .contact-info a:hover {
+    transform: translateX(-5px);
+}
+
+html[lang="ar"] .nav-links a {
+    margin-left: 0;
+    margin-right: 32px;
+}
+
+html[lang="ar"] .nav-links a::after {
+    left: auto;
+    right: 0;
+}
+
+@media (max-width: 767px) {
+    html[lang="ar"] .hero-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    html[lang="ar"] .hero-text {
+        text-align: center;
+    }
+
+    html[lang="ar"] .hero-buttons {
+        justify-content: center;
+    }
+
+    .social-icons {
+        gap: 16px;
+        margin-top: 25px;
+    }
+
+    .social-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .social-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .social-icons {
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ============================================
+   iPhone Specific Responsive Design
+   ============================================ */
+
+/* iPhone SE (375px) and smaller */
+@media only screen and (max-width: 375px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero {
+        padding-top: 120px;
+        min-height: 85vh;
+    }
+
+    .hero-image {
+        max-width: 200px;
+    }
+
+    .hero h1 {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .social-icons {
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .social-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .social-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .about-content,
+    .contact-container {
+        padding: 24px 20px;
+    }
+
+    .service-card {
+        padding: 24px 20px;
+    }
+
+    .service-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 15px;
+    }
+
+    .whatsapp-float svg {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+/* iPhone 12/13/14 (390px) */
+@media only screen and (min-width: 376px) and (max-width: 390px) {
+    .hero h1 {
+        font-size: 1.4rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .hero-image {
+        max-width: 220px;
+    }
+}
+
+/* iPhone 12/13/14 Pro Max (428px) */
+@media only screen and (min-width: 391px) and (max-width: 428px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-image {
+        max-width: 240px;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    /* Fix for iOS Safari viewport units */
+    .hero {
+        min-height: -webkit-fill-available;
+    }
+
+    /* Fix for safe area insets on iPhone X and newer */
+    .whatsapp-float {
+        bottom: max(20px, env(safe-area-inset-bottom));
+        right: max(15px, env(safe-area-inset-right));
+    }
+
+    header {
+        padding-top: max(20px, env(safe-area-inset-top));
+    }
+
+    /* Fix for iOS Safari scrolling */
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Fix for iOS Safari input zoom */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+
+    /* Fix for iOS Safari button tap highlight */
+    .btn,
+    .social-icon,
+    .whatsapp-float {
+        -webkit-tap-highlight-color: rgba(0, 255, 153, 0.3);
+    }
+}
+
+/* Landscape orientation for iPhone */
+@media only screen and (max-width: 926px) and (orientation: landscape) {
+    .hero {
+        padding-top: 100px;
+        min-height: auto;
+        padding-bottom: 40px;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .hero-image {
+        max-width: 180px;
+    }
+
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    .social-icons {
+        gap: 10px;
+        margin-top: 15px;
+    }
+}
+
+/* Fix for iPhone notch and safe areas */
+@supports (padding: max(0px)) {
+    .container {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding-left: max(15px, env(safe-area-inset-left));
+            padding-right: max(15px, env(safe-area-inset-right));
+        }
+    }
+}
