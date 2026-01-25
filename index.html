@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="Professional portfolio of Oussama Hitte - Frontend Developer specializing in responsive web design, landing pages, and modern web development.">
+    <meta name="keywords" content="web developer, frontend developer, responsive design, landing pages, portfolio">
+    <title>Oussama Hitte - Frontend Developer | Professional Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/sxL38Q2W/1765658953083.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="https://i.postimg.cc/sxL38Q2W/1765658953083.jpg">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/sxL38Q2W/1765658953083.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container header-content">
+            <a href="#home" class="logo">Oussama</a>
+            
+            <nav class="nav-links">
+                <a href="#home" data-translate="nav.home">Home</a>
+                <a href="#about" data-translate="nav.about">About</a>
+                <a href="#services" data-translate="nav.services">Services</a>
+                <a href="#my-works" data-translate="nav.work">Work</a>
+                <a href="#contact" data-translate="nav.contact">Contact</a>
+                <a href="#contact" class="btn" data-translate="nav.hire">Hire Me</a>
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+                    <button class="lang-btn" data-lang="ar" aria-label="Arabic">AR</button>
+                    <button class="lang-btn" data-lang="fr" aria-label="French">FR</button>
+                </div>
+            </nav>
+            
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="language-switcher" style="margin-right: 0;">
+                    <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+                    <button class="lang-btn" data-lang="ar" aria-label="Arabic">AR</button>
+                    <button class="lang-btn" data-lang="fr" aria-label="French">FR</button>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">☰</button>
+            </div>
+        </div>
+        
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#home" data-translate="nav.home">Home</a>
+            <a href="#about" data-translate="nav.about">About</a>
+            <a href="#services" data-translate="nav.services">Services</a>
+            <a href="#my-works" data-translate="nav.work">Work</a>
+            <a href="#contact" data-translate="nav.contact">Contact</a>
+            <a href="#contact" class="btn" data-translate="nav.hire">Hire Me</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="https://i.postimg.cc/nrB1nM93/1765658953083.jpg" alt="Oussama Hitte - Frontend Developer" class="hero-image">
+                <div class="hero-text">
+                    <h1 data-translate="hero.headline">Are you looking for a stunning website that looks great on any device?</h1>
+                    <p data-translate="hero.para1">I am a professional web developer and create fully responsive elegant designs. My aim is to provide quality work and always wanted to satisfy my clients with my beautiful designs.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/ipm.kira" target="_blank" rel="noopener noreferrer" class="social-icon facebook" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" aria-hidden="true">
+                                <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/oussama.hitte" target="_blank" rel="noopener noreferrer" class="social-icon instagram" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                            </svg>
+                        </a>
+                        <a href="tel:+212659404133" class="social-icon whatsapp" aria-label="WhatsApp">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 339.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56 81.2 56 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                            </svg>
+                        </a>
+                        <a href="https://discord.gg/R59aXTtJK" target="_blank" rel="noopener noreferrer" class="social-icon discord" aria-label="Discord">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                <path d="M297.216 243.2c0 15.616-11.52 28.416-26.112 28.416-14.336 0-26.112-12.8-26.112-28.416s11.52-28.416 26.112-28.416c14.592 0 26.112 12.8 26.112 28.416zm-119.552-28.416c-14.592 0-26.112 12.8-26.112 28.416s11.776 28.416 26.112 28.416c14.592 0 26.112-12.8 26.112-28.416.256-15.616-11.52-28.416-26.112-28.416zM448 52.736V512c-64.494-56.994-43.868-38.128-118.784-107.776l13.568 47.36H52.48C23.552 451.584 0 428.032 0 399.104V52.736C0 23.808 23.552 0 52.48 0h343.04C424.448 0 448 23.808 448 52.736zm-72.96 242.688c0-82.432-36.864-149.248-36.864-149.248-36.864-27.648-71.936-26.88-71.936-26.88l-3.584 4.096c43.52 13.312 63.744 32.512 63.744 32.512-60.811-33.329-132.244-33.335-191.232-7.424-9.472 4.352-15.104 7.424-15.104 7.424s20.224-19.2 63.744-32.512l-2.56-3.584s-35.072-.768-71.936 26.88c0 0-36.864 66.816-36.864 149.248 0 0 21.504 37.12 78.08 38.912 0 0 9.472-11.52 13.312-21.248-25.344-7.68-34.816-23.808-34.816-23.808 3.072 2.304 5.888 3.84 8.448 5.12 5.12 2.816 10.24 5.376 15.36 7.68 26.624 11.264 55.296 18.432 85.248 20.736 9.472 0 18.944-.256 28.16-.768 3.584-.256 7.168-.512 10.752-.768 33.28-2.048 64.512-9.728 92.672-20.992 7.168-2.56 14.336-5.376 21.248-8.448 0 0-10.24 16.128-35.328 23.808 3.84 9.728 13.312 21.248 13.312 21.248 56.576-1.792 78.336-38.912 78.336-38.912z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#my-works" class="btn" data-translate="hero.viewWork">View Work</a>
+                        <a href="#contact" class="btn btn-secondary" data-translate="hero.contact">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-translate="about.title">About Me</h2>
+            <div class="about-content">
+                <p class="about-text" data-translate="about.text">I'm a front-end developer specializing in creating high-converting digital experiences. With expertise in modern web technologies and conversion optimization, I help businesses transform their online presence into measurable results.</p>
+                
+                <div class="skills-grid">
+                    <div class="skill-item">HTML</div>
+                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Landing Pages</div>
+                    <div class="skill-item">CPA Funnels</div>
+                    <div class="skill-item">Mobile Optimization</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title" data-translate="services.title">Services</h2>
+            <div class="services-grid">
+                <article class="service-card">
+                    <h3 data-translate="services.landing.title">Landing Pages</h3>
+                    <p data-translate="services.landing.text">High-converting landing pages designed to maximize conversions and drive business growth.</p>
+                </article>
+                <article class="service-card">
+                    <h3 data-translate="services.cpa.title">CPA Funnels</h3>
+                    <p data-translate="services.cpa.text">Optimized funnel designs that guide users through the customer journey and increase ROI.</p>
+                </article>
+                <article class="service-card">
+                    <h3 data-translate="services.gaming.title">Gaming Websites</h3>
+                    <p data-translate="services.gaming.text">Immersive gaming websites with engaging interfaces and seamless user experiences.</p>
+                </article>
+                <article class="service-card">
+                    <h3 data-translate="services.performance.title">Performance Optimization</h3>
+                    <p data-translate="services.performance.text">Speed optimization and technical improvements for better user experience and SEO.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="my-works">
+        <div class="container">
+            <h2 class="section-title" data-translate="myworks.title">My Works</h2>
+            <div class="my-works-grid">
+                <article class="work-item">
+                    <img src="https://i.postimg.cc/sgvCDcxp/design-psd-to-responsive-wordpress-landing-page-or-customized-squeeze-page.jpg" alt="Landing Page Example 1 - Responsive Design">
+                </article>
+                <article class="work-item">
+                    <img src="https://i.postimg.cc/wvkGkyMr/develop-website-responsive-with-html-css-javascript-(1).webp" alt="Landing Page Example 2 - Modern Web Development">
+                </article>
+                <article class="work-item">
+                    <img src="https://i.postimg.cc/8CS4np2v/develop-website-responsive-with-html-css-javascript.webp" alt="Landing Page Example 3 - Responsive Website">
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" data-translate="contact.title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 data-translate="contact.subtitle">Let's work together</h3>
+                    <p data-translate="contact.description">Have a project in mind? Contact me directly:</p>
+                    <a href="mailto:oussamahitte6@gmail.com">oussamahitte6@gmail.com</a>
+                </div>
+                
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="name" data-translate="contact.form.name">Name</label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-translate="contact.form.email">Email</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-translate="contact.form.message">Message</label>
+                        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                    </div>
+                    <button type="submit" class="btn" data-translate="contact.form.submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Oussama Hitte &copy; <span id="currentYear"></span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/212659404133" target="_blank" class="whatsapp-float" aria-label="Contact via WhatsApp">
+        <div class="whatsapp-tooltip" data-translate="whatsapp.message">
+            <strong data-translate="whatsapp.title">Let's Start Your Project!</strong>
+            <span data-translate="whatsapp.text">Click to discuss your project on WhatsApp</span>
+        </div>
+        <!-- Notification Message Beside Button -->
+        <div class="whatsapp-side-notification" id="whatsappSideNotification" role="alert" aria-live="polite">
+            <div class="side-notification-content">
+                <div class="side-notification-text">
+                    <p class="side-notification-message" data-translate="whatsapp.notificationMessage">Click here to discuss your project on WhatsApp</p>
+                </div>
+                <button class="side-notification-close" aria-label="Close notification" onclick="closeWhatsAppSideNotification()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" aria-hidden="true">
+                        <path d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="side-notification-progress"></div>
+        </div>
+        <span class="whatsapp-notification" data-translate="whatsapp.notification">New</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 339.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56 81.2 56 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+        </svg>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
