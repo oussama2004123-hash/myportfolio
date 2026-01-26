@@ -205,4 +205,4 @@ MIT License - feel free to use this project for your portfolio!
 
 ## Contact
 
-For questions or support, contact: oussamahitte6@gmail.com
+For questions or support, please use the contact form on the portfolio website.

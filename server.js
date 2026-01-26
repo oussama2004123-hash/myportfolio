@@ -119,6 +119,15 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
+    // Check if CONTACT_EMAIL is configured
+    if (!process.env.CONTACT_EMAIL) {
+      console.error('CONTACT_EMAIL environment variable is not set');
+      return res.status(500).json({
+        success: false,
+        message: 'Contact form is not properly configured. Please contact the administrator.'
+      });
+    }
+
     // Create transporter
     const transporter = createTransporter();
 
@@ -130,7 +139,7 @@ app.post('/api/contact', async (req, res) => {
     // Email content
     const mailOptions = {
       from: process.env.EMAIL_USER || 'noreply@portfolio.com',
-      to: process.env.CONTACT_EMAIL || 'oussamahitte6@gmail.com',
+      to: process.env.CONTACT_EMAIL,
       replyTo: email, // Use original email for reply-to (not sanitized)
       subject: `New Contact Form Submission from ${name}`,
       html: `
