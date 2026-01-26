@@ -81,18 +81,38 @@ The contact form automatically uses `window.location.origin`, so it will work au
 6. Railway automatically detects `Procfile` and starts the server
 7. Your app will be live at: `https://your-app.railway.app`
 
-### Render
+### Render (Recommended - Easiest Setup)
 
-1. Sign up at https://render.com
-2. Click "New" → "Web Service"
-3. Connect your GitHub repository
-4. Settings:
+1. **Sign up** at https://render.com (free tier available)
+2. **Click "New" → "Web Service"**
+3. **Connect your GitHub repository:**
+   - Select your repository: `oussama2004123-hash/myportfolio`
+   - Render will auto-detect Node.js
+4. **Configure settings:**
+   - **Name:** `portfolio` (or any name you prefer)
+   - **Region:** Choose closest to you
+   - **Branch:** `main`
+   - **Root Directory:** Leave empty (or `/` if needed)
+   - **Runtime:** `Node`
    - **Build Command:** `npm install`
-   - **Start Command:** `node server.js`
-5. Go to "Environment" tab
-6. Add all environment variables
-7. Click "Create Web Service"
-8. Your app will be live at: `https://your-app.onrender.com`
+   - **Start Command:** `npm start` (or `node server.js`)
+   - **Plan:** Free (or choose paid for better performance)
+5. **Add Environment Variables:**
+   - Go to "Environment" tab
+   - Click "Add Environment Variable" for each:
+     ```
+     EMAIL_SERVICE=gmail
+     EMAIL_USER=your-email@gmail.com
+     EMAIL_PASS=your-app-password-here
+     CONTACT_EMAIL=your-email@gmail.com
+     PORT=10000
+     ```
+   - **Important:** For Gmail, use an App Password (not your regular password)
+6. **Click "Create Web Service"**
+7. **Wait for deployment** (first deploy takes 2-3 minutes)
+8. **Your app will be live at:** `https://portfolio.onrender.com` (or your custom name)
+
+**Note:** Render's free tier spins down after 15 minutes of inactivity. First request after spin-down takes ~30 seconds to wake up.
 
 ### Vercel
 

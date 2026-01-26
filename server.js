@@ -203,13 +203,23 @@ app.get('*', (req, res) => {
 
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`📧 Contact form endpoint: http://localhost:${PORT}/api/contact`);
-  console.log(`🌐 Also accessible at http://127.0.0.1:${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`📧 Contact form endpoint: /api/contact`);
+  console.log(`💚 Health check endpoint: /api/health`);
   
+  // Check environment variables
   if (!process.env.EMAIL_USER) {
     console.warn('⚠️  Warning: EMAIL_USER not set. Email functionality may not work.');
-    console.warn('   Please configure your .env file with email credentials.');
+    console.warn('   Please configure environment variables on your hosting platform.');
+  }
+  
+  if (!process.env.CONTACT_EMAIL) {
+    console.warn('⚠️  Warning: CONTACT_EMAIL not set. Contact form will not work.');
+    console.warn('   Please set CONTACT_EMAIL environment variable.');
+  }
+  
+  if (process.env.EMAIL_USER && process.env.CONTACT_EMAIL) {
+    console.log('✅ Email configuration detected. Contact form is ready!');
   }
 });
 
