@@ -57,16 +57,56 @@ const createTransporter = () => {
   }
 };
 
+// Helper function to sanitize HTML input
+function escapeHtml(text) {
+  if (!text) return '';
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    let { name, email, message } = req.body;
+
+    // Trim and validate
+    if (name) name = name.trim();
+    if (email) email = email.trim();
+    if (message) message = message.trim();
 
     // Validation
     if (!name || !email || !message) {
       return res.status(400).json({
         success: false,
         message: 'All fields are required'
+      });
+    }
+
+    // Length validation to prevent abuse
+    if (name.length > 100) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name is too long (max 100 characters)'
+      });
+    }
+
+    if (email.length > 255) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is too long'
+      });
+    }
+
+    if (message.length > 5000) {
+      return res.status(400).json({
+        success: false,
+        message: 'Message is too long (max 5000 characters)'
       });
     }
 
@@ -82,20 +122,25 @@ app.post('/api/contact', async (req, res) => {
     // Create transporter
     const transporter = createTransporter();
 
+    // Sanitize inputs for HTML email
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
+
     // Email content
     const mailOptions = {
       from: process.env.EMAIL_USER || 'noreply@portfolio.com',
       to: process.env.CONTACT_EMAIL || 'oussamahitte6@gmail.com',
-      replyTo: email,
+      replyTo: email, // Use original email for reply-to (not sanitized)
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #00ff99;">New Contact Form Submission</h2>
           <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Name:</strong> ${safeName}</p>
+            <p><strong>Email:</strong> ${safeEmail}</p>
             <p><strong>Message:</strong></p>
-            <p style="white-space: pre-wrap; background-color: white; padding: 15px; border-radius: 4px; margin-top: 10px;">${message}</p>
+            <p style="white-space: pre-wrap; background-color: white; padding: 15px; border-radius: 4px; margin-top: 10px;">${safeMessage}</p>
           </div>
           <p style="color: #666; font-size: 12px;">This email was sent from your portfolio contact form.</p>
         </div>
