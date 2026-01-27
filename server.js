@@ -27,11 +27,14 @@ const createTransporter = () => {
   // If using Gmail, you need to use an App Password
   // For other services, adjust accordingly
   if (process.env.EMAIL_SERVICE === 'gmail') {
+    // Remove spaces from App Password if present (Gmail App Passwords sometimes have spaces)
+    const appPassword = process.env.EMAIL_PASS ? process.env.EMAIL_PASS.replace(/\s+/g, '') : '';
+    
     return nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS // App Password for Gmail
+        pass: appPassword // App Password for Gmail (spaces removed automatically)
       }
     });
   } else if (process.env.EMAIL_SERVICE === 'smtp') {
@@ -128,8 +131,29 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
+    // Check if EMAIL_USER and EMAIL_PASS are configured
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('EMAIL_USER or EMAIL_PASS environment variable is not set');
+      return res.status(500).json({
+        success: false,
+        message: 'Email service is not properly configured. Please contact the administrator.'
+      });
+    }
+
     // Create transporter
     const transporter = createTransporter();
+    
+    // Verify transporter connection
+    try {
+      await transporter.verify();
+      console.log('✅ Email transporter verified successfully');
+    } catch (error) {
+      console.error('❌ Email transporter verification failed:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Email service configuration error. Please try again later.'
+      });
+    }
 
     // Sanitize inputs for HTML email
     const safeName = escapeHtml(name);
@@ -180,9 +204,21 @@ app.post('/api/contact', async (req, res) => {
   } catch (error) {
     console.error('Error sending email:', error);
     
+    // More detailed error messages for debugging
+    let errorMessage = 'Failed to send message. Please try again later.';
+    
+    if (error.code === 'EAUTH') {
+      errorMessage = 'Email authentication failed. Please check email credentials.';
+    } else if (error.code === 'ECONNECTION') {
+      errorMessage = 'Could not connect to email server. Please try again later.';
+    } else if (error.responseCode === 535) {
+      errorMessage = 'Email authentication failed. Please check your App Password.';
+    }
+    
     res.status(500).json({
       success: false,
-      message: 'Failed to send message. Please try again later or contact directly via email.'
+      message: errorMessage,
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });
