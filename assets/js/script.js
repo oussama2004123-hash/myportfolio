@@ -496,18 +496,60 @@ if (contactForm) {
             : 'Sending...';
         
         try {
+            // Create AbortController for timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+            
             // Send data to backend
             const response = await fetch(`${API_URL}/api/contact`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, message })
+                body: JSON.stringify({ name, email, message }),
+                signal: controller.signal
             });
             
-            const data = await response.json();
+            clearTimeout(timeoutId);
             
-            if (response.ok && data.success) {
+            // Check if response is ok
+            if (!response.ok) {
+                // Try to get error message from response
+                let errorData;
+                try {
+                    errorData = await response.json();
+                } catch (e) {
+                    errorData = { message: `Server error: ${response.status} ${response.statusText}` };
+                }
+                
+                const errorMsg = errorData.message || (currentLang === 'ar' 
+                    ? 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.'
+                    : currentLang === 'fr'
+                    ? 'Une erreur s\'est produite lors de l\'envoi du message. Veuillez réessayer.'
+                    : 'An error occurred while sending the message. Please try again.');
+                
+                console.error('Server error:', response.status, errorData);
+                showNotification(errorMsg, 'error');
+                return;
+            }
+            
+            // Parse JSON response
+            let data;
+            try {
+                const text = await response.text();
+                data = JSON.parse(text);
+            } catch (e) {
+                console.error('Failed to parse response:', e);
+                const errorMsg = currentLang === 'ar' 
+                    ? 'استجابة غير صحيحة من الخادم. يرجى المحاولة مرة أخرى.'
+                    : currentLang === 'fr'
+                    ? 'Réponse invalide du serveur. Veuillez réessayer.'
+                    : 'Invalid response from server. Please try again.';
+                showNotification(errorMsg, 'error');
+                return;
+            }
+            
+            if (data.success) {
                 // Success message
                 const successMsg = currentLang === 'ar' 
                     ? `شكرًا ${name}! تم إرسال رسالتك بنجاح. سأعود إليك قريبًا.`
@@ -531,11 +573,27 @@ if (contactForm) {
             }
         } catch (error) {
             console.error('Error:', error);
-            const errorMsg = currentLang === 'ar' 
-                ? 'فشل الاتصال بالخادم. يرجى المحاولة مرة أخرى لاحقًا.'
-                : currentLang === 'fr'
-                ? 'Échec de la connexion au serveur. Veuillez réessayer plus tard.'
-                : 'Failed to connect to server. Please try again later.';
+            
+            let errorMsg;
+            if (error.name === 'AbortError') {
+                errorMsg = currentLang === 'ar' 
+                    ? 'انتهت مهلة الاتصال. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.'
+                    : currentLang === 'fr'
+                    ? 'Délai d\'attente expiré. Veuillez vérifier votre connexion Internet et réessayer.'
+                    : 'Request timeout. Please check your internet connection and try again.';
+            } else if (error.message && error.message.includes('Failed to fetch')) {
+                errorMsg = currentLang === 'ar' 
+                    ? 'فشل الاتصال بالخادم. يرجى التحقق من أن الخادم يعمل والمحاولة مرة أخرى.'
+                    : currentLang === 'fr'
+                    ? 'Échec de la connexion au serveur. Veuillez vérifier que le serveur fonctionne et réessayer.'
+                    : 'Failed to connect to server. Please check that the server is running and try again.';
+            } else {
+                errorMsg = currentLang === 'ar' 
+                    ? 'فشل الاتصال بالخادم. يرجى المحاولة مرة أخرى لاحقًا.'
+                    : currentLang === 'fr'
+                    ? 'Échec de la connexion au serveur. Veuillez réessayer plus tard.'
+                    : 'Failed to connect to server. Please try again later.';
+            }
             
             showNotification(errorMsg, 'error');
         } finally {
