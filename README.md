@@ -1,208 +1,33 @@
-# Portfolio Website - Full Stack
+# Oussama Hitte — Portfolio
 
-A modern, responsive portfolio website with a Node.js/Express backend for handling contact form submissions.
+Responsive React + TypeScript portfolio with a charcoal and lime design, project showcases, résumé, contact form, and optional AI assistant.
 
-## Features
+## Local development
 
-- 🎨 Modern, clean UI/UX design
-- 📱 Fully responsive (mobile-first approach)
-- 🌍 Multi-language support (English, Arabic, French) with RTL support
-- ✨ Smooth animations and transitions
-- 📧 Backend contact form with email functionality
-- 🚀 Fast and optimized performance
-
-## Tech Stack
-
-### Frontend
-- HTML5 (Semantic)
-- CSS3 (Modern animations, responsive design)
-- JavaScript (Vanilla ES6+)
-- Google Fonts (Lilita One, Outfit)
-
-### Backend
-- Node.js
-- Express.js
-- Nodemailer (Email sending)
-- CORS enabled
-
-## 🚀 Quick Start - Receive Messages
-
-**Want to receive contact form messages?** See **[QUICK_START.md](QUICK_START.md)** for a 5-minute setup guide!
-
-### How It Works:
-1. Visitor fills out contact form → 
-2. Backend receives data → 
-3. Email sent to your inbox → 
-4. You receive the message! ✉️
-
-## Installation
-
-1. **Clone or download the project**
-   ```bash
-   cd portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-   ```bash
-   # Create .env file (copy from example)
-   cp .env.example .env
-   ```
-   
-   Then edit `.env` file with your email configuration:
-   ```env
-   EMAIL_SERVICE=gmail
-   EMAIL_USER=your-email@gmail.com
-   EMAIL_PASS=your-app-password
-   CONTACT_EMAIL=your-contact-email@gmail.com
-   PORT=3000
-   ```
-
-4. **For Gmail users (Recommended):**
-   - Enable 2-Step Verification: https://myaccount.google.com/security
-   - Generate App Password: https://myaccount.google.com/apppasswords
-   - Select "Mail" → "Other" → Name it "Portfolio"
-   - Copy the 16-character password
-   - Use the App Password (NOT your regular password) in `.env`
-   
-   **📖 Detailed Setup:** See [SETUP_GUIDE.md](SETUP_GUIDE.md) for complete instructions
-
-## Running the Application
-
-### Development Mode (with auto-reload)
-```bash
-npm run dev
+```sh
+npm ci --prefix frontend
+npm run dev --prefix frontend
 ```
 
-### Production Mode
-```bash
-npm start
+The Vite server previews the website. For local API calls, use `vercel dev` from the repository root or run the existing Express backend with a suitable Vite proxy.
+
+## Deploy to Vercel
+
+Import `oussama2004123-hash/myportfolio` in Vercel. Leave **Root Directory** at the repository root (`.`). The root `vercel.json` installs the locked frontend dependencies, builds the Vite app, and serves `frontend/dist`. Root `api/` entry points expose the contact and chat functions. You can alternatively set Root Directory to `frontend`, which includes the same API handlers and its own configuration.
+
+Use Node.js 24.x. Set these server-side environment variables in Vercel:
+
+- `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `CONTACT_RECEIVER`: Gmail SMTP credentials and destination for the contact form. Use a Google app password, not your account password.
+- `DEEPSEEK_API_KEY`: optional AI responses.
+- `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`: required with DeepSeek for persistent per-IP rate limiting.
+
+Without AI credentials, the assistant uses a basic portfolio FAQ. Without email credentials, the form explains that email delivery is unavailable; the direct email and WhatsApp links still work. No secrets belong in Git or in variables prefixed with `VITE_`.
+
+## Verify production build
+
+```sh
+npm run build --prefix frontend
+npm run preview --prefix frontend
 ```
 
-The server will start on `http://localhost:3000` (or the port specified in `.env`)
-
-## Project Structure
-
-```
-portfolio/
-├── assets/
-│   ├── css/
-│   │   └── style.css          # Main stylesheet
-│   ├── js/
-│   │   └── script.js           # Frontend JavaScript
-│   └── images/                # Image assets
-├── index.html                 # Main HTML file
-├── server.js                  # Express backend server
-├── package.json               # Dependencies and scripts
-├── .env.example              # Environment variables template
-├── .gitignore                # Git ignore file
-└── README.md                 # This file
-```
-
-## API Endpoints
-
-### POST `/api/contact`
-Submit contact form data.
-
-**Request Body:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "message": "Hello, I'm interested in working with you."
-}
-```
-
-**Success Response:**
-```json
-{
-  "success": true,
-  "message": "Thank you! Your message has been sent successfully.",
-  "messageId": "email-message-id"
-}
-```
-
-**Error Response:**
-```json
-{
-  "success": false,
-  "message": "Error message here"
-}
-```
-
-### GET `/api/health`
-Health check endpoint.
-
-**Response:**
-```json
-{
-  "status": "ok",
-  "message": "Server is running",
-  "timestamp": "2024-01-01T00:00:00.000Z"
-}
-```
-
-## Email Configuration
-
-### Option 1: Gmail
-```env
-EMAIL_SERVICE=gmail
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-app-password
-```
-
-### Option 2: Custom SMTP
-```env
-EMAIL_SERVICE=smtp
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_SECURE=false
-EMAIL_USER=your-email@example.com
-EMAIL_PASS=your-password
-```
-
-## Deployment
-
-### Deploying to Platforms
-
-1. **Heroku:**
-   - Add `Procfile`: `web: node server.js`
-   - Set environment variables in Heroku dashboard
-   - Deploy: `git push heroku main`
-
-2. **Vercel/Netlify:**
-   - Configure build command: `npm install`
-   - Set start command: `node server.js`
-   - Add environment variables in platform settings
-
-3. **Railway/Render:**
-   - Connect your repository
-   - Set environment variables
-   - Deploy automatically
-
-## Customization
-
-- **Colors:** Edit CSS variables in `assets/css/style.css`
-- **Content:** Update text in `index.html`
-- **Languages:** Modify translations in `assets/js/script.js`
-- **Email Template:** Customize email HTML in `server.js`
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## License
-
-MIT License - feel free to use this project for your portfolio!
-
-## Contact
-
-For questions or support, please use the contact form on the portfolio website.
+Project artwork is an illustrative interface concept, not a screenshot of the linked production sites.
